@@ -1,0 +1,15 @@
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\bin\Debug\TCPClientTestApp.exe.config
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\bin\Debug\TCPClientTestApp.exe
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\bin\Debug\TCPClientTestApp.pdb
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.csprojAssemblyReference.cache
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\MainWindow.g.cs
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\App.g.cs
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp_MarkupCompile.cache
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp_MarkupCompile.lref
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\MainWindow.baml
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.g.resources
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.Properties.Resources.resources
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.csproj.GenerateResource.cache
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.csproj.CoreCompileInputs.cache
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.exe
+c:\users\andre\source\repos\TCPClientTestApp\TCPClientTestApp\obj\Debug\TCPClientTestApp.pdb
