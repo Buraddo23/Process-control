@@ -37,17 +37,15 @@ namespace TCPClientTestApp
 			TcpListener server = null;
 			try
 			{
-				// Set the TcpListener on port 13000.
-				Int32 port = 2000;
-				IPAddress localAddr = IPAddress.Parse("10.120.8.100");
+				Int32 port = 3000;
+				IPAddress localAddr = IPAddress.Parse("127.0.0.1");
 
-				// TcpListener server = new TcpListener(port);
 				server = new TcpListener(localAddr, port);
 
-				// Start listening for client requests.
+				//Start listening for client requests.
 				server.Start();
 
-				// Buffer for reading data
+				//Buffer for reading data
 				Byte[] bytes = new Byte[8];
 				String data = null;
 
@@ -55,10 +53,9 @@ namespace TCPClientTestApp
 				//Enter the listening loop.
 				while (true)
 				{
-					bck.ReportProgress(0, "Waiting for a connection... ");					
+					bck.ReportProgress(0, "Waiting for a connection... ");
 
-					// Perform a blocking call to accept requests.
-					// You could also user server.AcceptSocket() here.
+					//Accept TcpClient
 					TcpClient client = server.AcceptTcpClient();
 					bck.ReportProgress(0, "Connected!");
 					
@@ -69,34 +66,27 @@ namespace TCPClientTestApp
 
 					int i;
 
-					// Loop to receive all the data sent by the client.
+					//Get all data sent by the client.
 					while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
 					{
-						// Translate data bytes to a ASCII string.
-						data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+						//display received data by reporting progress to the background worker
 						bck.ReportProgress(0, bytes[1].ToString() + ", " + bytes[6].ToString());					
 					}
-					// Shutdown and end connection
+
+					//Shutdown and end connection
 					client.Close();
 				}
 
 			}
 			catch (Exception ex)
 			{
+				bck.ReportProgress(0, string.Format("SocketException: {0}", ex.ToString()));
 			}
 		}
 
 		private void btnSend_Click(object sender, RoutedEventArgs e)
-		{
-			//byte[] msg = System.Text.Encoding.ASCII.GetBytes(txtMessageToSend.Text);
-
-			// Send the message
-			//stream.Write(msg, 0, msg.Length);
-
-			try
-			{
-
-				//---create a TCPClient object at the IP and port no.---	
+		{	try
+			{	
 				if (client == null)
 					CreateConnection();
 				
@@ -104,14 +94,12 @@ namespace TCPClientTestApp
 				byte[] bytesToSend = new byte[8];
 				bytesToSend[1] = 1;
 				bytesToSend[6] = 2;
-
-				//---send the text---
-				//_senderWorker.ReportProgress(0, string.Format("Sending bytes[1]= {0} and bytes[6] = {1}: ", bytesToSend[1].ToString(), bytesToSend[6].ToString()));
+								
 				nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 			}
 			catch (Exception ex)
 			{
-
+				tbDataReceived.Text = tbDataReceived + ex.ToString();
 			}
 		}
 
@@ -140,7 +128,7 @@ namespace TCPClientTestApp
 		private void CreateConnection()
 		{
 			//change IP address to the machine where you want to send the message to
-			client = new TcpClient("10.120.8.105", 2000);
+			client = new TcpClient("127.0.0.1", 2000);
 		}
 	}
 }
