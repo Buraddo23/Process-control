@@ -55,14 +55,13 @@ namespace TCPClientTestApp
 				//Enter the listening loop.
 				while (true)
 				{
-					bck.ReportProgress(0, "Waiting for a connection... ");
-					//Console.Write("Waiting for a connection... ");
+					bck.ReportProgress(0, "Waiting for a connection... ");					
 
 					// Perform a blocking call to accept requests.
 					// You could also user server.AcceptSocket() here.
 					TcpClient client = server.AcceptTcpClient();
 					bck.ReportProgress(0, "Connected!");
-					//Console.WriteLine("Connected!");
+					
 
 					data = null;
 
@@ -109,9 +108,6 @@ namespace TCPClientTestApp
 				//---send the text---
 				//_senderWorker.ReportProgress(0, string.Format("Sending bytes[1]= {0} and bytes[6] = {1}: ", bytesToSend[1].ToString(), bytesToSend[6].ToString()));
 				nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-
-				//Thread.Sleep(2000);
-				
 			}
 			catch (Exception ex)
 			{
@@ -138,12 +134,12 @@ namespace TCPClientTestApp
 		{
 			string data = (string)e.UserState;
 			
-			tbDataReceived.Text = tbDataReceived.Text + Environment.NewLine + string.Format("Received: {0}", data);
-			
+			tbDataReceived.Text = tbDataReceived.Text + Environment.NewLine + string.Format("Received: {0}", data);			
 		}
 
 		private void CreateConnection()
 		{
+			//change IP address to the machine where you want to send the message to
 			client = new TcpClient("10.120.8.105", 2000);
 		}
 	}
