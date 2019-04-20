@@ -1,0 +1,17 @@
+C:\Users\borle_000\Dropbox\Scoala-Predare\PrivateFolder\PS2\tcpclientapp\Simulator\bin\Debug\Simulator.dll
+C:\Users\borle_000\Dropbox\Scoala-Predare\PrivateFolder\PS2\tcpclientapp\Simulator\bin\Debug\Simulator.pdb
+C:\Users\borle_000\Dropbox\Scoala-Predare\PrivateFolder\PS2\tcpclientapp\Simulator\obj\Debug\Simulator.csproj.CoreCompileInputs.cache
+C:\Users\borle_000\Dropbox\Scoala-Predare\PrivateFolder\PS2\tcpclientapp\Simulator\obj\Debug\Simulator.dll
+C:\Users\borle_000\Dropbox\Scoala-Predare\PrivateFolder\PS2\tcpclientapp\Simulator\obj\Debug\Simulator.pdb
+C:\Users\borle_000\Desktop\DemoApp\Simulator\bin\Debug\Simulator.dll
+C:\Users\borle_000\Desktop\DemoApp\Simulator\bin\Debug\Simulator.pdb
+C:\Users\borle_000\Desktop\DemoApp\Simulator\obj\Debug\Simulator.csprojResolveAssemblyReference.cache
+C:\Users\borle_000\Desktop\DemoApp\Simulator\obj\Debug\Simulator.csproj.CoreCompileInputs.cache
+C:\Users\borle_000\Desktop\DemoApp\Simulator\obj\Debug\Simulator.dll
+C:\Users\borle_000\Desktop\DemoApp\Simulator\obj\Debug\Simulator.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\Simulator\bin\Debug\Simulator.dll
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\Simulator\bin\Debug\Simulator.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\Simulator\obj\Debug\Simulator.csprojAssemblyReference.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\Simulator\obj\Debug\Simulator.csproj.CoreCompileInputs.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\Simulator\obj\Debug\Simulator.dll
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\Simulator\obj\Debug\Simulator.pdb

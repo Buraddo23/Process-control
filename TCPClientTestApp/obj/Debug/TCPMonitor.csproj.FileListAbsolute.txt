@@ -1,0 +1,35 @@
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\bin\Debug\TCPMonitor.exe.config
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\bin\Debug\TCPMonitor.exe
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\bin\Debug\TCPMonitor.pdb
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\bin\Debug\Simulator.dll
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\bin\Debug\Simulator.pdb
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.csprojResolveAssemblyReference.cache
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\MainWindow.g.cs
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\App.g.cs
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor_MarkupCompile.cache
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor_MarkupCompile.lref
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\MainWindow.baml
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.g.resources
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.Properties.Resources.resources
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.csproj.GenerateResource.Cache
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.csproj.CoreCompileInputs.cache
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.exe
+C:\Users\borle_000\Desktop\DemoApp\TCPClientTestApp\obj\Debug\TCPMonitor.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\bin\Debug\TCPMonitor.exe.config
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\bin\Debug\TCPMonitor.exe
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\bin\Debug\TCPMonitor.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\bin\Debug\Simulator.dll
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\bin\Debug\Simulator.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.csprojAssemblyReference.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\MainWindow.g.cs
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\App.g.cs
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor_MarkupCompile.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor_MarkupCompile.lref
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\MainWindow.baml
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.g.resources
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.Properties.Resources.resources
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.csproj.GenerateResource.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.csproj.CoreCompileInputs.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.csproj.CopyComplete
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.exe
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPClientTestApp\obj\Debug\TCPMonitor.pdb

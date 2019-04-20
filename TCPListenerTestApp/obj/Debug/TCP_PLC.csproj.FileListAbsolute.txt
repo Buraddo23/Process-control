@@ -1,0 +1,19 @@
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\bin\Debug\TCP_PLC.exe.config
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\bin\Debug\TCP_PLC.exe
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\bin\Debug\TCP_PLC.pdb
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\bin\Debug\Simulator.dll
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\bin\Debug\Simulator.pdb
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\obj\Debug\TCP_PLC.csprojResolveAssemblyReference.cache
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\obj\Debug\TCP_PLC.csproj.CoreCompileInputs.cache
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\obj\Debug\TCP_PLC.exe
+C:\Users\borle_000\Desktop\DemoApp\TCPListenerTestApp\obj\Debug\TCP_PLC.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\bin\Debug\TCP_PLC.exe.config
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\bin\Debug\TCP_PLC.exe
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\bin\Debug\TCP_PLC.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\bin\Debug\Simulator.dll
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\bin\Debug\Simulator.pdb
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\obj\Debug\TCP_PLC.csprojAssemblyReference.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\obj\Debug\TCP_PLC.csproj.CoreCompileInputs.cache
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\obj\Debug\TCP_PLC.csproj.CopyComplete
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\obj\Debug\TCP_PLC.exe
+C:\Users\Buraddo\OneDrive - Universitatea Politehnica Timisoara\An 3\PS\_Aplicatie Send-Receive 2019\TCPListenerTestApp\obj\Debug\TCP_PLC.pdb
