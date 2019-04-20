@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace TCP_PLC
 {
-    public class Sender
+    /*public class Sender
 	{		
 		BackgroundWorker _senderWorker;
         Simulator.Simulator _process;
@@ -28,7 +28,7 @@ namespace TCP_PLC
 				{
 					NetworkStream nwStream = client.GetStream();
 					byte[] bytesToSend = new byte[8];
-					bytesToSend[1] = _process.GetState()[0];					
+					bytesToSend[1] = _process.GetState();					
 
 					//se apeleaza metoda report progress pentru a face update pe UI (adica in aplicatia consola).
 					_senderWorker.ReportProgress(0, string.Format("Sending bytes[1]= {0} and bytes[6] = {1}: ", bytesToSend[1].ToString(), bytesToSend[6].ToString()));
@@ -43,5 +43,5 @@ namespace TCP_PLC
 			}
 			
 		}
-	}
+	}*/
 }

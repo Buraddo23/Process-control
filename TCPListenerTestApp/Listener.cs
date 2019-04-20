@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace TCP_PLC
 {
-    public class Listener
+    /*public class Listener
 	{	
         Simulator.Simulator _process;
 
@@ -67,5 +67,5 @@ namespace TCP_PLC
 
             Console.WriteLine("Hit enter to continue...");            		
 		}
-	}	
+	}	*/
 }

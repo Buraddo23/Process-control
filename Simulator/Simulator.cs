@@ -1,10 +1,11 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace Simulator
 {
 
     /// <summary>
-    /// Enumerare folosita pentru a transmite/receptiona comenzi
+    /// Enum used for transmission of commands
     /// </summary>
     public enum Command
     {       
@@ -13,63 +14,63 @@ namespace Simulator
     }
 
     /// <summary>
-    /// Enumerare folosita pentru a modela starea procesului
+    /// Enum used to represent process state
     /// </summary>
     public enum ProcessState
-    {        
-        PumpOne = 1,
-        PumpTwo = 2,
-        Sensor_1 = 4,
-        Sensor_2 = 8,
-        Sensor_3 = 16,
-        Sensor_4 = 32,
-        Sensor_5 = 64,
+    {
+        Sensor_1 = 1,
+        Sensor_2 = 2,
+        Sensor_3 = 4,
+        Sensor_4 = 8,
+        Sensor_5 = 16
     }
 
     public class Simulator
     {
         private int _state;
         private int _waterLevel;
-        private int _inFlow, _outFlow1, _outFlow2;
+        private byte _outFlow1, _outFlow2;
 
-        public Simulator(int inf = 8, int out1 = 6, int out2 = 6)
+        /// <summary>
+        /// Initializes the process in the initial state
+        /// </summary>
+        /// <param name="pow1">Flowing power of Pump 1 (Flow/second). Recomended value: 2-12</param>
+        /// <param name="pow2">Flowing power of Pump 2 (Flow/second). Recomended value: 2-12</param>
+        public Simulator(byte pow1 = 6, byte pow2 = 6)
         {
             _state = 0;
-            _waterLevel = 0;
-            _inFlow = inf;
-            _outFlow1 = out1;
-            _outFlow2 = out2;
+            _waterLevel = 50;
+            _outFlow1 = pow1;
+            _outFlow2 = pow2;
         }
 
-        public void UpdateState(byte CommandState)
+        /// <summary>
+        /// Simulates the process for 1s
+        /// </summary>
+        /// <param name="CommandState">Input values for the process (see Command enum)</param>
+        /// <param name="inf">Inflow rate set by potentiometer</param>
+        /// <returns>State of the process (digital outputs) (see ProcessState enum)</returns>
+        public byte[] UpdateState(int CommandState, byte inf)
         {
             //Determining Flow rate
-            int flow = _inFlow;
-            if ((CommandState | (int)Command.PumpOne) != 0)
-            {
+            int flow = inf/16;
+            Console.WriteLine(flow);
+            if ((CommandState & (int)Command.PumpOne) != 0)
                 flow -= _outFlow1;
-                _state |= (int)ProcessState.PumpOne;
-            }
-            else
-            {
-                _state &= ~(int)ProcessState.PumpOne;
-            }
-            if ((CommandState | (int)Command.PumpTwo) != 0)
-            {
+            if ((CommandState & (int)Command.PumpTwo) != 0)
                 flow -= _outFlow2;
-                _state |= (int)ProcessState.PumpTwo;
-            }
-            else
-            {
-                _state &= ~(int)ProcessState.PumpTwo;
-            }
 
             //Applying flow rate
             _waterLevel += flow;
             if (_waterLevel >= 255)
             {
                 _waterLevel = 255;
-                System.Console.WriteLine("Tank overflow");
+                Console.WriteLine("Tank overflow");
+            }
+            if (_waterLevel <= 0)
+            {
+                _waterLevel = 0;
+                Console.WriteLine("Tank empty");
             }
 
             //Creating the state of the sensors
@@ -85,130 +86,10 @@ namespace Simulator
             if (_waterLevel >= 235) _state |= (int)ProcessState.Sensor_3;
             else _state &= ~(int)ProcessState.Sensor_3;
 
-            System.Console.WriteLine(_state);
+            //System.Console.Write("Water Level {0}\tProcess State {1}\n", _waterLevel, _state);
 
             Thread.Sleep(1000);
+            return new byte[] { (byte)_state, (byte)_waterLevel };
         }
-        public int GetState()
-        {
-            return _state;
-        }
-
-        /*private void ExecuteLongDelayCommand(int Delay)
-        {
-            System.Threading.Thread.Sleep(Delay);
-            _state[0] = (int)ProcessState.PumpOne;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpOne 
-                | (int)ProcessState.PumpTwo;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpOne 
-                | (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpOne 
-                | (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpOne 
-                | (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpOne 
-                | (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3 
-                | (int)ProcessState.Level_4;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpOne 
-                | (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3 
-                | (int)ProcessState.Level_4 
-                | (int)ProcessState.Level_5;
-            System.Threading.Thread.Sleep(Delay);
-        }
-
-        private void ExecuteShortDelayCommand(int Delay)
-        {
-            _state[0] = (int)ProcessState.PumpOne
-                | (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3 
-                | (int)ProcessState.Level_4 
-                | (int)ProcessState.Level_5;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.PumpTwo 
-                | (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3 
-                | (int)ProcessState.Level_4 
-                | (int)ProcessState.Level_5;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3 
-                | (int)ProcessState.Level_4 
-                | (int)ProcessState.Level_5;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3 
-                | (int)ProcessState.Level_4;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.Level_1 
-                | (int)ProcessState.Level_2 
-                | (int)ProcessState.Level_3;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.Level_1
-                | (int)ProcessState.Level_2;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.Level_1;
-            System.Threading.Thread.Sleep(Delay);
-
-            _state[0] = (int)ProcessState.Stopped;
-            System.Threading.Thread.Sleep(Delay);
-        }
-        
-
-        public void UpdateState(int CommandState)
-        {            
-            int longDelayForBothPump = (int)Command.LongDelay 
-                | (int)Command.PumpOne 
-                | (int)Command.PumpTwo 
-                | (int)Command.Started;
-
-            int shortDelayForBothPump = (int)Command.SmallDelay 
-                | (int)Command.PumpOne 
-                | (int)Command.PumpTwo 
-                | (int)Command.Stopped;
-
-            if(CommandState == longDelayForBothPump)
-            {
-                ExecuteLongDelayCommand(5000);
-            }
-            else if (CommandState == shortDelayForBothPump)
-            {
-                ExecuteShortDelayCommand(2000);
-            }            
-        }*/
     }
 }
