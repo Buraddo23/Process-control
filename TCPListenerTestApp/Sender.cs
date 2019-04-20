@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace TCP_PLC
 {
-	public class Sender
+    public class Sender
 	{		
 		BackgroundWorker _senderWorker;
         Simulator.Simulator _process;

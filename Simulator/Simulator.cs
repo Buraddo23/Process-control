@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading;
 
 namespace Simulator
 {
@@ -11,13 +7,9 @@ namespace Simulator
     /// Enumerare folosita pentru a transmite/receptiona comenzi
     /// </summary>
     public enum Command
-    {
-        Stopped = 0,
-        Started = 1,
-        SmallDelay = 2,        
-        LongDelay = 8,        
-        PumpOne = 32,
-        PumpTwo = 64
+    {       
+        PumpOne = 1,
+        PumpTwo = 2
     }
 
     /// <summary>
@@ -27,21 +19,82 @@ namespace Simulator
     {        
         PumpOne = 1,
         PumpTwo = 2,
-        Level_1 = 4,
-        Level_2 = 8,
-        Level_3 = 16,
-        Level_4 = 32,
-        Level_5 = 64,
-        Stopped = 128
+        Sensor_1 = 4,
+        Sensor_2 = 8,
+        Sensor_3 = 16,
+        Sensor_4 = 32,
+        Sensor_5 = 64,
     }
-
-
 
     public class Simulator
     {
-        private byte[] _state = new byte[] { 0x00, 0x00};
-        
-        private void ExecuteLongDelayCommand(int Delay)
+        private int _state;
+        private int _waterLevel;
+        private int _inFlow, _outFlow1, _outFlow2;
+
+        public Simulator(int inf = 8, int out1 = 6, int out2 = 6)
+        {
+            _state = 0;
+            _waterLevel = 0;
+            _inFlow = inf;
+            _outFlow1 = out1;
+            _outFlow2 = out2;
+        }
+
+        public void UpdateState(byte CommandState)
+        {
+            //Determining Flow rate
+            int flow = _inFlow;
+            if ((CommandState | (int)Command.PumpOne) != 0)
+            {
+                flow -= _outFlow1;
+                _state |= (int)ProcessState.PumpOne;
+            }
+            else
+            {
+                _state &= ~(int)ProcessState.PumpOne;
+            }
+            if ((CommandState | (int)Command.PumpTwo) != 0)
+            {
+                flow -= _outFlow2;
+                _state |= (int)ProcessState.PumpTwo;
+            }
+            else
+            {
+                _state &= ~(int)ProcessState.PumpTwo;
+            }
+
+            //Applying flow rate
+            _waterLevel += flow;
+            if (_waterLevel >= 255)
+            {
+                _waterLevel = 255;
+                System.Console.WriteLine("Tank overflow");
+            }
+
+            //Creating the state of the sensors
+            if (_waterLevel >= 35) _state |= (int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1;
+            else _state &= ~((int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1);
+
+            if (_waterLevel >= 145) _state |= (int)ProcessState.Sensor_2;
+            else _state &= ~(int)ProcessState.Sensor_2;
+
+            if (_waterLevel >= 185) _state |= (int)ProcessState.Sensor_5;
+            else _state &= ~(int)ProcessState.Sensor_5;
+
+            if (_waterLevel >= 235) _state |= (int)ProcessState.Sensor_3;
+            else _state &= ~(int)ProcessState.Sensor_3;
+
+            System.Console.WriteLine(_state);
+
+            Thread.Sleep(1000);
+        }
+        public int GetState()
+        {
+            return _state;
+        }
+
+        /*private void ExecuteLongDelayCommand(int Delay)
         {
             System.Threading.Thread.Sleep(Delay);
             _state[0] = (int)ProcessState.PumpOne;
@@ -156,11 +209,6 @@ namespace Simulator
             {
                 ExecuteShortDelayCommand(2000);
             }            
-        }
-
-        public byte[] GetState()
-        {
-            return _state;
-        }
+        }*/
     }
 }
