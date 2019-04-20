@@ -13,7 +13,14 @@ namespace TCP_PLC
 	{        
         //static BackgroundWorker senderWorker;	
         static Simulator.Simulator process;
+
+        //I0.0 - OFF; I0.1 - ON; I0.3 - Test pump 1; I0.4 - Test pump 2; I0.5 - Reset; I0.6 - M1 emergency relay; I0.7 - M2 emergency relay
+        //I1.0 - B1; I1.1 - B2; I1.2 - B3; I1.3 - B4; I1.4 - B5
+        //I2 - Water level (8 bit res : 0-10V)
         static byte[] PLCin = new byte[3] { 0, 0, 0 };
+
+        //O0.0 - Alarm; O0.1 - ON LED; O0.3 - M1 on LED; O0.4 - M2 on LED; O0.6 - M1; O0.7 - M2
+        //O1 - Inflow (8 bit res : 0-16 units/sec)
         static byte[] PLCout = new byte[2] { 3, 128 };
 
 

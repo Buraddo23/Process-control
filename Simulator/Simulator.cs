@@ -63,15 +63,9 @@ namespace Simulator
             //Applying flow rate
             _waterLevel += flow;
             if (_waterLevel >= 255)
-            {
                 _waterLevel = 255;
-                Console.WriteLine("Tank overflow");
-            }
             if (_waterLevel <= 0)
-            {
                 _waterLevel = 0;
-                Console.WriteLine("Tank empty");
-            }
 
             //Creating the state of the sensors
             if (_waterLevel >= 35) _state |= (int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1;
