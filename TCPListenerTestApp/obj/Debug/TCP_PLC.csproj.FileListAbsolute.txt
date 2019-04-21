@@ -27,3 +27,13 @@ C:\Users\Buraddo\Source\Repos\Proiect Sincretic\TCPListenerTestApp\obj\Debug\TCP
 C:\Users\Buraddo\Source\Repos\Proiect Sincretic\TCPListenerTestApp\obj\Debug\TCP_PLC.csproj.CopyComplete
 C:\Users\Buraddo\Source\Repos\Proiect Sincretic\TCPListenerTestApp\obj\Debug\TCP_PLC.exe
 C:\Users\Buraddo\Source\Repos\Proiect Sincretic\TCPListenerTestApp\obj\Debug\TCP_PLC.pdb
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\bin\Debug\TCP_PLC.exe.config
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\bin\Debug\TCP_PLC.exe
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\bin\Debug\TCP_PLC.pdb
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\bin\Debug\Simulator.dll
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\bin\Debug\Simulator.pdb
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\obj\Debug\TCP_PLC.csprojAssemblyReference.cache
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\obj\Debug\TCP_PLC.csproj.CoreCompileInputs.cache
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\obj\Debug\TCP_PLC.csproj.CopyComplete
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\obj\Debug\TCP_PLC.exe
+C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\TCPListenerTestApp\obj\Debug\TCP_PLC.pdb

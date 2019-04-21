@@ -31,17 +31,33 @@ namespace Simulator
         private int _waterLevel;
         private byte _outFlow1, _outFlow2;
 
+        private int _commandState;
+        private byte _inf;
+        public void SetCommand(int com, byte inf)
+        {
+            _commandState = com;
+            _inf = inf;
+        }
+        public byte[] GetState()
+        {
+            return new byte[] { (byte)_state, (byte)_waterLevel };
+        }
+        
+
         /// <summary>
         /// Initializes the process in the initial state
         /// </summary>
         /// <param name="pow1">Flowing power of Pump 1 (Flow/second). Recomended value: 2-12</param>
         /// <param name="pow2">Flowing power of Pump 2 (Flow/second). Recomended value: 2-12</param>
-        public Simulator(byte pow1 = 6, byte pow2 = 6)
+        /// <param name="wl">Initial water level in tank (0-255)</param>
+        public Simulator(byte pow1 = 6, byte pow2 = 6, byte wl = 50)
         {
             _state = 0;
-            _waterLevel = 50;
+            _waterLevel = wl;
             _outFlow1 = pow1;
             _outFlow2 = pow2;
+
+            new Thread(UpdateState).Start();
         }
 
         /// <summary>
@@ -50,40 +66,39 @@ namespace Simulator
         /// <param name="CommandState">Input values for the process (see Command enum)</param>
         /// <param name="inf">Inflow rate set by potentiometer</param>
         /// <returns>State of the process (digital outputs) (see ProcessState enum)</returns>
-        public byte[] UpdateState(int CommandState, byte inf)
+        public void UpdateState()
         {
-            //Determining Flow rate
-            int flow = inf/16;
-            Console.WriteLine(flow);
-            if ((CommandState & (int)Command.PumpOne) != 0)
-                flow -= _outFlow1;
-            if ((CommandState & (int)Command.PumpTwo) != 0)
-                flow -= _outFlow2;
+            while (true)
+            {
+                //Determining Flow rate
+                int flow = _inf / 16;
+                if ((_commandState & (int)Command.PumpOne) != 0)
+                    flow -= _outFlow1;
+                if ((_commandState & (int)Command.PumpTwo) != 0)
+                    flow -= _outFlow2;
 
-            //Applying flow rate
-            _waterLevel += flow;
-            if (_waterLevel >= 255)
-                _waterLevel = 255;
-            if (_waterLevel <= 0)
-                _waterLevel = 0;
+                //Applying flow rate
+                _waterLevel += flow;
+                if (_waterLevel >= 255)
+                    _waterLevel = 255;
+                if (_waterLevel <= 0)
+                    _waterLevel = 0;
 
-            //Creating the state of the sensors
-            if (_waterLevel >= 35) _state |= (int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1;
-            else _state &= ~((int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1);
+                //Creating the state of the sensors
+                if (_waterLevel >= 35) _state |= (int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1;
+                else _state &= ~((int)ProcessState.Sensor_4 | (int)ProcessState.Sensor_1);
 
-            if (_waterLevel >= 145) _state |= (int)ProcessState.Sensor_2;
-            else _state &= ~(int)ProcessState.Sensor_2;
+                if (_waterLevel >= 145) _state |= (int)ProcessState.Sensor_2;
+                else _state &= ~(int)ProcessState.Sensor_2;
 
-            if (_waterLevel >= 185) _state |= (int)ProcessState.Sensor_5;
-            else _state &= ~(int)ProcessState.Sensor_5;
+                if (_waterLevel >= 185) _state |= (int)ProcessState.Sensor_5;
+                else _state &= ~(int)ProcessState.Sensor_5;
 
-            if (_waterLevel >= 235) _state |= (int)ProcessState.Sensor_3;
-            else _state &= ~(int)ProcessState.Sensor_3;
+                if (_waterLevel >= 235) _state |= (int)ProcessState.Sensor_3;
+                else _state &= ~(int)ProcessState.Sensor_3;
 
-            //System.Console.Write("Water Level {0}\tProcess State {1}\n", _waterLevel, _state);
-
-            Thread.Sleep(1000);
-            return new byte[] { (byte)_state, (byte)_waterLevel };
+                Thread.Sleep(1000);
+            }
         }
     }
 }

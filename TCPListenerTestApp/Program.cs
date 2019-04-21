@@ -4,18 +4,18 @@ using System.Threading;
 
 namespace TCP_PLC
 {
-    public enum digitalInputs0
+    public enum DigitalInputs0
     {
-        off       = 128,
-        on        =  64,
-        pump1Test =  16,
-        pump2Test =   8,
-        reset     =   4,
-        M1Relay   =   2,
-        M2Relay   =   1
+        Off         = 128,
+        On          =  64,
+        PumpOneTest =  16,
+        PumpTwoTest =   8,
+        Reset       =   4,
+        M1Relay     =   2,
+        M2Relay     =   1
     }
 
-    public enum digitalInputs1
+    public enum DigitalInputs1
     {
         Sensor_1 =  1,
         Sensor_2 =  2,
@@ -24,9 +24,9 @@ namespace TCP_PLC
         Sensor_5 = 16
     }
 
-    public enum digitalOutputs
+    public enum DigitalOutputs
     {
-        alarm   = 128,
+        Alarm   = 128,
         OnLED   =  64,
         M1LED   =  16,
         M2LED   =   8,
@@ -44,103 +44,180 @@ namespace TCP_PLC
         /// <summary>
         /// To be called within a new thread to simulate a 0.5Hz signal to O0.3
         /// </summary>
-        static void clockGenerator()
+        static void ClockGenerator()
         {
-            if ((PLCin[0] | (int)digitalInputs0.M1Relay) != 0)
+            while (true)
             {
-                PLCout[0] ^= (int)digitalOutputs.M1LED;
+                if (power)
+                {
+                    if ((plcIn[0] & (int)DigitalInputs0.M1Relay) != 0)
+                    {
+                        plcOut[0] ^= (int)DigitalOutputs.M1LED;
+                    }
+                    if ((plcIn[0] & (int)DigitalInputs0.M2Relay) != 0)
+                    {
+                        plcOut[0] ^= (int)DigitalOutputs.M2LED;
+                    }
+                    Thread.Sleep(2000);
+                }
             }
-            if ((PLCin[0] | (int)digitalInputs0.M2Relay) != 0)
-            {
-                PLCout[0] ^= (int)digitalOutputs.M2LED;
-            }
-            Thread.Sleep(500);
         }
 
-        //static BackgroundWorker senderWorker;	
+        /// <summary>
+        /// Test button function for pump 1
+        /// </summary>
+        static void PumpOneTest()
+        {
+            while (true)
+            {
+                if (power)
+                {
+                    if ((plcIn[0] & (int)DigitalInputs0.PumpOneTest) != 0)
+                    {
+                        plcOut[0] |= (int)DigitalOutputs.PumpOne
+                                  | (int)DigitalOutputs.M1LED;
+                        Thread.Sleep(3000);
+                        plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
+                        plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M1LED);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Test button function for pump 2
+        /// </summary>
+        static void PumpTwoTest()
+        {
+            while (true)
+            {
+                if (power)
+                {
+                    if ((plcIn[0] & (int)DigitalInputs0.PumpTwoTest) != 0)
+                    {
+                        plcOut[0] |= (int)DigitalOutputs.PumpTwo
+                                  | (int)DigitalOutputs.M2LED;
+                        Thread.Sleep(3000);
+                        plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
+                        plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M2LED);
+                    }
+                }
+            }
+        }
+
         static Simulator.Simulator process;
 
         //I0.0 - OFF; I0.1 - ON; I0.2 - Unused; I0.3 - Test pump 1; I0.4 - Test pump 2; I0.5 - Reset; I0.6 - M1 emergency relay; I0.7 - M2 emergency relay
         //I1.0 - Unused; I1.1 - Unused; I1.2 - Unused; I1.3 - B5; I1.4 - B4; I1.5 - B3; I1.6 - B2; I1.7 - B1
         //I2 - Water level (8 bit res : 0-10V)
-        static byte[] PLCin = new byte[3] { 0, 0, 0 };
+        static byte[] plcIn = new byte[3] { 0, 0, 0 };
 
         //O0.0 - Alarm; O0.1 - ON LED; O0.2 - Unused; O0.3 - M1 on LED; O0.4 - M2 on LED; O0.6 - M1; O0.7 - M2
         //O1 - Y Inflow (8 bit res : 0-16 units/sec)
-        static byte[] PLCout = new byte[2] { 0, 0 };
+        static byte[] plcOut = new byte[2] { 0, 0 };
 
+        static bool power = false;
 		static void Main(string[] args)
 		{
             process = new Simulator.Simulator();
-            Thread clockGeneratorThread = new Thread(clockGenerator);
-            clockGeneratorThread.Start();
-
-            bool power = false;
+            new Thread(ClockGenerator).Start();
+            new Thread(PumpOneTest).Start();
+            new Thread(PumpTwoTest).Start();
+            
+            bool brokenPump = false;
 
             while (true)
             {
                 //Power button functionality
-                if ((PLCin[0] | (int)digitalInputs0.on) != 0)
+                if ((plcIn[0] & (int)DigitalInputs0.On) != 0)
                 {
                     power = true;
-                    PLCout[0] |= (int)digitalOutputs.OnLED;
+                    plcOut[0] |= (int)DigitalOutputs.OnLED;
                 }
-                if ((PLCin[0] | (int)digitalInputs0.off) != 0)
+                if ((plcIn[0] & (int)DigitalInputs0.Off) != 0)
                 {
                     power = false;
-                    PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.OnLED);
+                    plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.OnLED);
                 }
-                
+
                 if (power)
                 {
-                    //Pump RS flip-flop based on level reported by sensors
-                    if ((PLCin[1] | (int)digitalInputs1.Sensor_1 | (int)digitalInputs1.Sensor_4) == 0)
+                    //Reset and Alarm behaviour
+                    if ((plcIn[0] & (int)DigitalInputs0.Reset) != 0)
                     {
-                        PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.PumpOne);
-                        PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.PumpTwo);
-                        PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.M1LED);
-                        PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.M2LED);
+                        plcOut[0] = (int)DigitalOutputs.OnLED;
+                        plcOut[1] = 0;
+                        brokenPump = false;
                     }
-                    if ((PLCin[1] | (int)digitalInputs1.Sensor_2) != 0)
+                    if (brokenPump)
                     {
-                        PLCout[0] |= (int)digitalOutputs.PumpOne;
-                        PLCout[0] |= (int)digitalOutputs.M1LED;
+                        plcOut[0] = (int)DigitalOutputs.Alarm
+                                  | (int)DigitalOutputs.OnLED;
+                        plcOut[1] = 0;
                     }
-                    if ((PLCin[1] | (int)digitalInputs1.Sensor_5) != 0)
+                    else
                     {
-                        PLCout[0] |= (int)digitalOutputs.PumpTwo;
-                        PLCout[0] |= (int)digitalOutputs.M2LED;
-                    }
+                        //Emergency bad pump behaviour
+                        if ((plcIn[0] & (int)DigitalInputs0.M1Relay) != 0)
+                        {
+                            plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
+                            plcOut[0] |= (int)DigitalOutputs.Alarm;
+                            brokenPump = true;
+                        }
+                        if ((plcIn[0] & (int)DigitalInputs0.M2Relay) != 0)
+                        {
+                            plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
+                            plcOut[0] |= (int)DigitalOutputs.Alarm;
+                            brokenPump = true;
+                        }
 
-                    //Emergency bad pump behaviour
-                    if ((PLCin[0] | (int)digitalInputs0.M1Relay) != 0)
-                    {
-                        PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.PumpOne);
+                        //Pump RS flip-flop based on level reported by sensors
+                        if ((plcIn[1] & (int)DigitalInputs1.Sensor_3) != 0)
+                        {
+                            plcOut[0] |= (int)DigitalOutputs.PumpOne
+                                      | (int)DigitalOutputs.PumpTwo
+                                      | (int)DigitalOutputs.M1LED
+                                      | (int)DigitalOutputs.M2LED
+                                      | (int)DigitalOutputs.Alarm;
+                        }
+                        if ((plcIn[1] & ((int)DigitalInputs1.Sensor_1 | (int)DigitalInputs1.Sensor_4)) == 0)
+                        {
+                            plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
+                            plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
+                            plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M1LED);
+                            plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M2LED);
+                        }
+                        if ((plcIn[1] & (int)DigitalInputs1.Sensor_2) != 0)
+                        {
+                            plcOut[0] |= (int)DigitalOutputs.PumpOne
+                                      | (int)DigitalOutputs.M1LED;
+                        }
+                        if ((plcIn[1] & (int)DigitalInputs1.Sensor_5) != 0)
+                        {
+                            plcOut[0] |= (int)DigitalOutputs.PumpTwo
+                                      | (int)DigitalOutputs.M2LED;
+                        }
                     }
-                    if ((PLCin[0] | (int)digitalInputs0.M2Relay) != 0)
-                    {
-                        PLCout[0] = (byte)(PLCout[0] & ~(int)digitalOutputs.PumpTwo);
-                    }             
                     
                     //Prepare the output format
-                    byte[] processOutputs;
                     int command = 0;
-                    if ((PLCout[0] & (int)digitalOutputs.PumpOne) != 0)
+                    if ((plcOut[0] & (int)DigitalOutputs.PumpOne) != 0)
                     {
                         command |= (int)Simulator.Command.PumpOne;
                     }
-                    if ((PLCout[0] & (int)digitalOutputs.PumpTwo) != 0)
+                    if ((plcOut[0] & (int)DigitalOutputs.PumpTwo) != 0)
                     {
                         command |= (int)Simulator.Command.PumpTwo;
                     }
-                                       
-                    //Update the inputs and the outputs of the PLC
-                    processOutputs = process.UpdateState(command, PLCout[1]);
-                    PLCin[1] = processOutputs[0];
-                    PLCin[2] = processOutputs[1];
 
-                    Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\t\tO0: {3}\tO1: {4}\n", PLCin[0], PLCin[1], PLCin[2], PLCout[0], PLCout[1]);
+                    //Set the outputs of the PLC
+                    process.SetCommand(command, plcOut[1]);
+                                 
                 }
+                //Update the inputs of the PLC
+                plcIn[1] = process.GetState()[0];
+                plcIn[2] = process.GetState()[1];
+                Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\nO0: {3}\tO1: {4}\n", plcIn[0], plcIn[1], plcIn[2], plcOut[0], plcOut[1]);
             }
 
             /*
