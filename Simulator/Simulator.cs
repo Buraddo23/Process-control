@@ -18,10 +18,10 @@ namespace Simulator
     /// </summary>
     public enum ProcessState
     {
-        Sensor_1 = 1,
-        Sensor_2 = 2,
-        Sensor_3 = 4,
-        Sensor_4 = 8,
+        Sensor_1 =  1,
+        Sensor_2 =  2,
+        Sensor_3 =  4,
+        Sensor_4 =  8,
         Sensor_5 = 16
     }
 
