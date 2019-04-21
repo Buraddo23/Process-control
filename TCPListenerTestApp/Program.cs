@@ -110,10 +110,11 @@ namespace TCP_PLC
         //I0.0 - OFF; I0.1 - ON; I0.2 - Unused; I0.3 - Test pump 1; I0.4 - Test pump 2; I0.5 - Reset; I0.6 - M1 emergency relay; I0.7 - M2 emergency relay
         //I1.0 - Unused; I1.1 - Unused; I1.2 - Unused; I1.3 - B5; I1.4 - B4; I1.5 - B3; I1.6 - B2; I1.7 - B1
         //I2 - Water level (8 bit res : 0-10V)
-        static byte[] plcIn = new byte[3] { 0, 0, 0 };
+        //I3 - Y Inflow value from potentiometer (8 bit res)
+        static byte[] plcIn = new byte[4] { 0, 0, 0, 0 };
 
         //O0.0 - Alarm; O0.1 - ON LED; O0.2 - Unused; O0.3 - M1 on LED; O0.4 - M2 on LED; O0.6 - M1; O0.7 - M2
-        //O1 - Y Inflow (8 bit res : 0-16 units/sec)
+        //O1 - Y Valve command (8 bit res : 0-16 units/sec)
         static byte[] plcOut = new byte[2] { 0, 0 };
 
         static bool power = false;
@@ -133,11 +134,13 @@ namespace TCP_PLC
                 {
                     power = true;
                     plcOut[0] |= (int)DigitalOutputs.OnLED;
+                    plcOut[1] = plcIn[3];
                 }
                 if ((plcIn[0] & (int)DigitalInputs0.Off) != 0)
                 {
                     power = false;
                     plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.OnLED);
+                    plcOut[1] = 0;
                 }
 
                 if (power)
@@ -146,7 +149,7 @@ namespace TCP_PLC
                     if ((plcIn[0] & (int)DigitalInputs0.Reset) != 0)
                     {
                         plcOut[0] = (int)DigitalOutputs.OnLED;
-                        plcOut[1] = 0;
+                        plcOut[1] = plcIn[3];
                         brokenPump = false;
                     }
                     if (brokenPump)
