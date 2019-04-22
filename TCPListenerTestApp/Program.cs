@@ -165,6 +165,8 @@ namespace TCP_PLC
                 {
                     power = false;
                     plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.OnLED);
+                    plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
+                    plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
                     plcOut[1] = 0;
                 }
 

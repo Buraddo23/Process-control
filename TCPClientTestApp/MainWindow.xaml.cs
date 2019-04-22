@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
-using Simulator;
 
 namespace TCPMonitor
 {
@@ -93,7 +92,6 @@ namespace TCPMonitor
 
         private void SendMessage(byte[] command)
         {
-            //change IP address to the machine where you want to send the message to
             if(client==null)
             {
                 client = new TcpClient("127.0.0.1", 2000);
@@ -106,41 +104,86 @@ namespace TCPMonitor
             nwStream.Write(bytesToSend, 0, bytesToSend.Length);
         }
 
-        /// <summary>
-        /// /// eveniment folosit pentru a trimite o comanda catre proces/simulator
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-		private void btnSend_Click(object sender, RoutedEventArgs e)
+		private void btnOff_Click(object sender, RoutedEventArgs e)
 		{
             try
 			{
-                SendMessage(new byte[] { 64, 128 });             
+                SendMessage(new byte[] { 128, 0 });             
 			}
 			catch (Exception ex)
 			{
 				tbDataReceived.Text = tbDataReceived + ex.ToString();
 			}
 		}
-
-		
-
-        /// <summary>
-        /// eveniment folosit pentru a trimite o comanda catre proces/simulator
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnStop_Click(object sender, RoutedEventArgs e)
+        
+        private void btnOn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                SendMessage(new byte[] { 128, 128 });               
+                SendMessage(new byte[] { 64, 128 });               
             }
             catch (Exception ex)
             {
                 tbDataReceived.Text = tbDataReceived + ex.ToString();
             }
         }
-      
+        private void btnPump1_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SendMessage(new byte[] { 16, 128 });
+            }
+            catch (Exception ex)
+            {
+                tbDataReceived.Text = tbDataReceived + ex.ToString();
+            }
+        }
+        private void btnPump2_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SendMessage(new byte[] { 8, 128 });
+            }
+            catch (Exception ex)
+            {
+                tbDataReceived.Text = tbDataReceived + ex.ToString();
+            }
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SendMessage(new byte[] { 4, 128 });
+            }
+            catch (Exception ex)
+            {
+                tbDataReceived.Text = tbDataReceived + ex.ToString();
+            }
+        }
+
+        private void cb1_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SendMessage(new byte[] { 2, 128 });
+            }
+            catch (Exception ex)
+            {
+                tbDataReceived.Text = tbDataReceived + ex.ToString();
+            }
+        }
+
+        private void cb2_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SendMessage(new byte[] { 1, 128 });
+            }
+            catch (Exception ex)
+            {
+                tbDataReceived.Text = tbDataReceived + ex.ToString();
+            }
+        }
     }
 }
