@@ -111,11 +111,31 @@ namespace TCP_PLC
         //I1.0 - Unused; I1.1 - Unused; I1.2 - Unused; I1.3 - B5; I1.4 - B4; I1.5 - B3; I1.6 - B2; I1.7 - B1
         //I2 - Water level (8 bit res : 0-10V)
         //I3 - Y Inflow value from potentiometer (8 bit res)
-        static byte[] plcIn = new byte[4] { 0, 0, 0, 0 };
+        private static byte[] plcIn = new byte[4] { 0, 0, 0, 0 };
+
+        public static void SetButtonState(byte inputs)
+        {
+            plcIn[0] = inputs;
+        }
+
+        public static void ModifyInflow(byte inf)
+        {
+            plcIn[3] = inf;
+        }
+
+        public static byte[] GetInputs()
+        {
+            return plcIn;
+        }
 
         //O0.0 - Alarm; O0.1 - ON LED; O0.2 - Unused; O0.3 - M1 on LED; O0.4 - M2 on LED; O0.6 - M1; O0.7 - M2
         //O1 - Y Valve command (8 bit res : 0-16 units/sec)
-        static byte[] plcOut = new byte[2] { 0, 0 };
+        private static byte[] plcOut = new byte[2] { 0, 0 };
+
+        public static byte[] GetOutputs()
+        {
+            return plcOut;
+        }
 
         static bool power = false;
 		static void Main(string[] args)
@@ -124,8 +144,10 @@ namespace TCP_PLC
             new Thread(ClockGenerator).Start();
             new Thread(PumpOneTest).Start();
             new Thread(PumpTwoTest).Start();
-            
             bool brokenPump = false;
+
+            new Thread(Send).Start();
+            new Thread(Listen).Start();
 
             while (true)
             {
@@ -220,43 +242,20 @@ namespace TCP_PLC
                 //Update the inputs of the PLC
                 plcIn[1] = process.GetState()[0];
                 plcIn[2] = process.GetState()[1];
-                Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\nO0: {3}\tO1: {4}\n", plcIn[0], plcIn[1], plcIn[2], plcOut[0], plcOut[1]);
+                //Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\nO0: {3}\tO1: {4}\n", plcIn[0], plcIn[1], plcIn[2], plcOut[0], plcOut[1]);
             }
-
-            /*
-            ///pentru partea de transmitere de date am folosit un background worker 
-            ///care poate sa ruleze o metoda intr-un thread separat (metoda rulata este SenderWorker_DoWork)
-            ///atentie la partea de update a UI-ului, pentru a face update la UI din background worker se foloseste
-            ///SenderWorker_ProgressChanged, daca nu folosit aceasta metoda se poate sa primiti exceptii legate de
-            ///faptul ca incercati sa faceti update pe UI dintr-un alt thread decat cel principal
-            senderWorker = new BackgroundWorker();
-			senderWorker.WorkerReportsProgress = true;
-			senderWorker.DoWork += SenderWorker_DoWork;
-			senderWorker.ProgressChanged += SenderWorker_ProgressChanged;
-			senderWorker.RunWorkerAsync();
-
-            /// varianta mai noua de implementare a paralelismului utilizand TPL
-            /// este recomandat sa utilizati aceasta varianta, este mai usor de gestionat si ofera mai multe facilitati
-            /// mai multe informatii si exemple: https://www.codeproject.com/Articles/1083787/Tasks-and-Task-Parallel-Library-TPL-Multi-threadin
-            Thread listenThread = new Thread(Listen);
-            listenThread.Start();*/
 		}
-        /*
-		private static void SenderWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-			Console.WriteLine(e.UserState);
-		}
-				
-		private static void SenderWorker_DoWork(object sender, DoWorkEventArgs e)
-		{
-			Sender dataSender = new Sender(senderWorker, process);
-			dataSender.Send();
-		}
+        
+		private static void Send()
+        {
+            Sender sender = new Sender();
+            sender.Send();
+        }
 
         private static void Listen()
         {
-            Listener listener = new Listener(process);
+            Listener listener = new Listener();
             listener.Listen();
-        }*/
-	}
+        }
+    }
 }
