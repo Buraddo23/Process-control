@@ -11,7 +11,7 @@ namespace TCP_PLC
 		{
 			try
 			{
-				TcpClient client = new TcpClient("127.0.0.1", 2000);
+				TcpClient client = new TcpClient("127.0.0.1", 3000);
 
 				while (true)
 				{

@@ -140,6 +140,9 @@ namespace TCP_PLC
         static bool power = false;
 		static void Main(string[] args)
 		{
+            Console.WriteLine("Press enter to start simulation");
+            Console.Read();
+
             process = new Simulator.Simulator();
             new Thread(ClockGenerator).Start();
             new Thread(PumpOneTest).Start();

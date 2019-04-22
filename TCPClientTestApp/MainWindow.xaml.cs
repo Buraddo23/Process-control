@@ -20,9 +20,7 @@ namespace TCPMonitor
 		{
 			InitializeComponent();            
         }
-
-
-
+        
         private void btnListen_Click(object sender, RoutedEventArgs e)
         {
             tbDataReceived.Text = "Start Listening";
@@ -47,7 +45,7 @@ namespace TCPMonitor
                 server.Start();
 
                 //Buffer for reading data
-                Byte[] bytes = new Byte[8];
+                Byte[] bytes = new Byte[6];
 
                 //Enter the listening loop.
                 while (true)
@@ -67,7 +65,12 @@ namespace TCPMonitor
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
                         //display received data by reporting progress to the background worker
-                        bck.ReportProgress(0, bytes[1].ToString() + ", " + bytes[6].ToString());
+                        bck.ReportProgress(0, "I0: " + bytes[0].ToString() + 
+                                            "\tI1: " + bytes[1].ToString() + 
+                                            "\tI2: " + bytes[2].ToString() +
+                                            "\tI3: " + bytes[3].ToString() +
+                                            "\nO0: " + bytes[4].ToString() +
+                                            "\tO1: " + bytes[5].ToString() + "\n");
                     }
 
                     //Shutdown and end connection
@@ -88,7 +91,7 @@ namespace TCPMonitor
             tbDataReceived.Text = string.Format("Received: {0}", data) + Environment.NewLine + tbDataReceived.Text;
         }
 
-        private void SendMessage(int Message)
+        private void SendMessage(byte[] command)
         {
             //change IP address to the machine where you want to send the message to
             if(client==null)
@@ -97,8 +100,8 @@ namespace TCPMonitor
             }
             
             NetworkStream nwStream = client.GetStream();
-            byte[] bytesToSend = new byte[8];           
-            bytesToSend[1] = (byte)Message;
+            byte[] bytesToSend = new byte[2];           
+            bytesToSend = command;
 
             nwStream.Write(bytesToSend, 0, bytesToSend.Length);
         }
@@ -109,9 +112,10 @@ namespace TCPMonitor
         /// <param name="sender"></param>
         /// <param name="e"></param>
 		private void btnSend_Click(object sender, RoutedEventArgs e)
-		{	try
+		{
+            try
 			{
-                SendMessage((int)Command.LongDelay | (int)Command.PumpOne | (int)Command.PumpTwo | (int)Command.Started);             
+                SendMessage(new byte[] { 64, 128 });             
 			}
 			catch (Exception ex)
 			{
@@ -130,7 +134,7 @@ namespace TCPMonitor
         {
             try
             {
-                SendMessage((int)Command.SmallDelay | (int)Command.PumpOne | (int)Command.PumpTwo | (int)Command.Stopped);               
+                SendMessage(new byte[] { 128, 128 });               
             }
             catch (Exception ex)
             {

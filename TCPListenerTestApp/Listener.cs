@@ -39,7 +39,8 @@ namespace TCP_PLC
                     // Loop to receive all the data sent by the client.
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
 					{
-                        Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\tI3: {3}\nO0: {4}\tO1: {5}\n", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5]);
+                        Program.SetButtonState(bytes[0]);
+                        Program.ModifyInflow(bytes[1]);
                     }
 
                     // Shutdown and end connection
