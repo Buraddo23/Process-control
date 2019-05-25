@@ -27,3 +27,9 @@ C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.
 C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.csproj.CoreCompileInputs.cache
 C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.dll
 C:\Users\Buraddo\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.pdb
+C:\Users\arhiva\Source\Repos\Proiect Sincretic 2\Simulator\bin\Debug\Simulator.dll
+C:\Users\arhiva\Source\Repos\Proiect Sincretic 2\Simulator\bin\Debug\Simulator.pdb
+C:\Users\arhiva\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.csprojAssemblyReference.cache
+C:\Users\arhiva\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.csproj.CoreCompileInputs.cache
+C:\Users\arhiva\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.dll
+C:\Users\arhiva\Source\Repos\Proiect Sincretic 2\Simulator\obj\Debug\Simulator.pdb
