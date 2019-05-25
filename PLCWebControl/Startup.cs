@@ -21,9 +21,7 @@ namespace PLCWebControl
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var service = new TcpService();
-            service.Connect();
-            services.AddSingleton<ITcpService>(service);
+            services.AddSingleton<ITcpService, TcpService>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

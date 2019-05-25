@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace PLCWebControl.Services
 {
-    interface ITcpService
+    public interface ITcpService
     {
         void Connect();
         StateDataModel GetLastData();

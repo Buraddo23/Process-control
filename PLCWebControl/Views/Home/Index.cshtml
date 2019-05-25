@@ -1,12 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model PLCWebControl.Models.StateDataModel
+@{
+    ViewData["Title"] = "Home Page";
 }
 
-<h2>Index</h2>
+<div class="text-center">
+    <form asp-controller="Home" asp-action="Send" method="post">
+        <div asp-validation-summary="All"></div>
 
-<ul>
-    @for (int i = 0; i < (int)ViewData["NumTimes"]; i++)
-    {
-        <li>@ViewData["Message"]</li>
-    }
-</ul>
+        <label asp-for="Buttons"></label>
+        <input type="text" asp-for="Buttons" />
+        <label asp-for="Sensors"></label>
+        <input type="text" asp-for="Sensors" />
+        <label asp-for="WaterLevel"></label>
+        <input type="text" asp-for="WaterLevel" />
+        <label asp-for="Inflow"></label>
+        <input type="text" asp-for="Inflow" />
+
+        <input type="submit" />
+    </form>
+</div>

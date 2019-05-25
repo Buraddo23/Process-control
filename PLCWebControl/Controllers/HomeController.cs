@@ -15,12 +15,10 @@ namespace PLCWebControl.Controllers
         }
 
         //This is the default action
-        public IActionResult Index(string name = "vasile", int numTimes = 5)
+        public IActionResult Index()
         {
-            ViewData["Data"] = name;
-            ViewData["NumTimes"] = numTimes;
-
-            return View();
+            var lastData = _service.GetLastData();
+            return View(lastData);
         }
 
         public IActionResult Privacy()

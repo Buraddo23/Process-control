@@ -3,7 +3,6 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PLCWebControl.Services
 {
@@ -12,6 +11,10 @@ namespace PLCWebControl.Services
         private TcpClient _client;
         private StateDataModel _lastData = new StateDataModel();
         private NetworkStream stream;
+
+        public TcpService() {
+            new Thread(Connect).Start();
+        }
 
         public void Connect()
         {
