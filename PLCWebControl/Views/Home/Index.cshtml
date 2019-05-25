@@ -1,7 +1,16 @@
-﻿@model PLCWebControl.Models.StateDataModel
+﻿@model PLCWebControl.Models.CommandDataModel
 @{
     ViewData["Title"] = "Home Page";
 }
+
+<div class="text-center">
+    <ul>
+        <li>Buttons = @ViewData["Buttons"]</li>
+        <li>Sensors = @ViewData["Sensors"]</li>
+        <li>WaterLevel = @ViewData["WaterLevel"]</li>
+        <li>Inflow = @ViewData["Inflow"]</li>
+    </ul>
+</div>
 
 <div class="text-center">
     <form asp-controller="Home" asp-action="Send" method="post">
@@ -9,12 +18,8 @@
 
         <label asp-for="Buttons"></label>
         <input type="text" asp-for="Buttons" />
-        <label asp-for="Sensors"></label>
-        <input type="text" asp-for="Sensors" />
-        <label asp-for="WaterLevel"></label>
-        <input type="text" asp-for="WaterLevel" />
-        <label asp-for="Inflow"></label>
-        <input type="text" asp-for="Inflow" />
+        <label asp-for="DesiredInflow"></label>
+        <input type="text" asp-for="DesiredInflow" />
 
         <input type="submit" />
     </form>

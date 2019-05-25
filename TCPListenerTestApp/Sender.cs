@@ -27,7 +27,7 @@ namespace TCP_PLC
 
 					nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 
-					Thread.Sleep(2000);
+					//Thread.Sleep(2000);
 				}
 			}
 			catch (Exception ex)

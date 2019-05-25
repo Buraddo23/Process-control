@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPMonitor", "TCPClientTestApp\TCPMonitor.csproj", "{019E581F-DF68-4F84-B24B-6707E40180FA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP_PLC", "TCPListenerTestApp\TCP_PLC.csproj", "{1C88CFEE-DA88-4167-BB33-191C6407D416}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulator", "Simulator\Simulator.csproj", "{6A5645A8-FC4D-4DA5-8400-AA9E56E87D76}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{019E581F-DF68-4F84-B24B-6707E40180FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{019E581F-DF68-4F84-B24B-6707E40180FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{019E581F-DF68-4F84-B24B-6707E40180FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{019E581F-DF68-4F84-B24B-6707E40180FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C88CFEE-DA88-4167-BB33-191C6407D416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C88CFEE-DA88-4167-BB33-191C6407D416}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C88CFEE-DA88-4167-BB33-191C6407D416}.Release|Any CPU.ActiveCfg = Release|Any CPU
