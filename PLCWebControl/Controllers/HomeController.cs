@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PLCWebControl.Models;
@@ -21,6 +22,47 @@ namespace PLCWebControl.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult SendButton(string button)
+        {
+            if (!String.IsNullOrWhiteSpace(button))
+            {
+                var command = new CommandDataModel();
+                switch (button)
+                {
+                    case "Off":
+                        command.Buttons = 128;
+                        command.DesiredInflow = 128;
+                        _service.SendData(command);
+                        break;
+                    case "On":
+                        command.Buttons = 64;
+                        command.DesiredInflow = 128;
+                        _service.SendData(command);
+                        break;
+                    case "P1":
+                        command.Buttons = 16;
+                        command.DesiredInflow = 128;
+                        _service.SendData(command);
+                        break;
+                    case "P2":
+                        command.Buttons = 8;
+                        command.DesiredInflow = 128;
+                        _service.SendData(command);
+                        break;
+                    case "RST":
+                        command.Buttons = 4;
+                        command.DesiredInflow = 128;
+                        _service.SendData(command);
+                        break;
+                    default:
+                        
+                        break;
+                }
+            }
+            return View("Index");
+        }
+
         [HttpGet]
         public JsonResult Stare() {         
             return Json(_service.GetLastData());
@@ -29,21 +71,6 @@ namespace PLCWebControl.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult Send(CommandDataModel data)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.SendData(data);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                var lastData = _service.GetLastData();
-                return View("Index", lastData);
-            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

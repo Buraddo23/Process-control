@@ -21,7 +21,16 @@
         <div id="sensor5"></div>
         <div id="sensor4"></div>
     </div>
-    <div class="container-control"
+    <div class="container-control">
+        @using (Html.BeginForm("SendButton", "Home"))
+        {
+            <input type="submit" value="Off" /><br />
+            <input type="submit" value="On" /><br /><br /><br />
+            <input type="submit" value="P1" /><br />
+            <input type="submit" value="P2" /><br />
+            <input type="submit" value="RST" />
+        }
+    </div>
 </body>
 </html>
 <!--
@@ -123,68 +132,5 @@
                 }
             });
         }
-
-        function postStare(stare) {
-            $.ajax({
-                type: 'POST',
-                url: '/Home/UpdateStare',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                data: JSON.stringify(stare),
-                success: function (response) {
-                    //    debugger;
-
-                },
-                failure: function (response) {
-                    debugger;
-                }
-            });
-
-        }
-
-        $("#umplere").click(function () {
-            if (activat == true) {
-                postStare({
-                    umplut: true,
-                    Deschis: false,
-                    Activat: true,
-                    Pornit: true
-                });
-
-            }
-
-        });
-
-        $("#golire").click(function () {
-            if (activat == true) {
-                postStare({
-                    umplut: false,
-                    Deschis: true,
-                    Activat: true,
-                    Pornit: true
-                });
-
-            }
-
-        });
-
-        $('#buton-activare').change(function () {
-            if ($(this).is(":checked")) {
-                postStare({
-                    umplut: umplut,
-                    Deschis: deschis,
-                    Activat: true,
-                    Pornit: pornit
-                });
-
-            }
-            else
-                postStare({
-                    umplut: umplut,
-                    Deschis: deschis,
-                    Activat: false,
-                    Pornit: pornit
-                });
-        });
     });</script>
 }
