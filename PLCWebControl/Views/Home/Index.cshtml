@@ -13,12 +13,15 @@
         <div id="sensor1"></div>
     </div>        
     <div class="container-mijloc">
-        <progress id="level" value=50 max=256 />
+        <progress id="level" value=50 max=256></progress>
+        <div id="motor1"></div>
+        <div id="motor2"></div>
     </div>
     <div class="container-dreapta">
         <div id="sensor5"></div>
         <div id="sensor4"></div>
     </div>
+    <div class="container-control"
 </body>
 </html>
 <!--
@@ -76,8 +79,41 @@
                 success: function (response) {
                     document.getElementById("level").value = response.waterLevel;
                     document.getElementById("inflow-value").innerHTML = "Inflow: " + response.waterLevel;
-                    //$(".buton-stare").addClass("pornire");
-                    //$(".valva").addClass("deschidere");
+                    if (response.Sensor1State == true) {
+                        document.getElementById("sensor1").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("sensor1").style.backgroundColor = "red";
+                    }
+                    if (response.Sensor2State == true) {
+                        document.getElementById("sensor2").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("sensor2").style.backgroundColor = "red";
+                    }
+                    if (response.Sensor3State == true) {
+                        document.getElementById("sensor3").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("sensor3").style.backgroundColor = "red";
+                    }
+                    if (response.Sensor4State == true) {
+                        document.getElementById("sensor4").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("sensor4").style.backgroundColor = "red";
+                    }
+                    if (response.Sensor5State == true) {
+                        document.getElementById("sensor5").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("sensor5").style.backgroundColor = "red";
+                    }
+                    if (response.M1ONLED == true) {
+                        document.getElementById("motor1").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("motor1").style.backgroundColor = "red";
+                    }
+                    if (response.M2ONLED == true) {
+                        document.getElementById("motor2").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("motor2").style.backgroundColor = "red";
+                    }
                     setTimeout(function () {
                         getStare();
                     }, 1000);

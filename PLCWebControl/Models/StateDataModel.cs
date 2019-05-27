@@ -35,9 +35,25 @@
         {
             get { return (Buttons & 1) != 0; }
         }
-        public bool[] SensorState
+        public bool Sensor1State
         {
-            get { return new bool[] { (Sensors & 1) != 0, (Sensors & 2) != 0, (Sensors & 4) != 0, (Sensors & 8) != 0, (Sensors & 16) != 0 }; }
+            get { return (Sensors & 1) != 0; }
+        }
+        public bool Sensor2State
+        {
+            get { return (Sensors & 2) != 0; }
+        }
+        public bool Sensor3State
+        {
+            get { return (Sensors & 4) != 0; }
+        }
+        public bool Sensor4State
+        {
+            get { return (Sensors & 8) != 0; }
+        }
+        public bool Sensor5State
+        {
+            get { return (Sensors & 16) != 0; }
         }
         public bool Alarm
         {
