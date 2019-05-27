@@ -3,24 +3,152 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <ul>
-        <li>Buttons = @ViewData["Buttons"]</li>
-        <li>Sensors = @ViewData["Sensors"]</li>
-        <li>WaterLevel = @ViewData["WaterLevel"]</li>
-        <li>Inflow = @ViewData["Inflow"]</li>
-    </ul>
-</div>
+<<!DOCTYPE html>
+<html>
+<body>
+    <div class="container-stanga">
+        <div id="inflow-value">Inflow: 100</div>
+        <div id="sensor3"></div>
+        <div id="sensor2"></div>
+        <div id="sensor1"></div>
+    </div>        
+    <div class="container-mijloc">
+        <progress id="level" value=50 max=256 />
+    </div>
+    <div class="container-dreapta">
+        <div id="sensor5"></div>
+        <div id="sensor4"></div>
+    </div>
+</body>
+</html>
+<!--
+<div class="container-dreapta">
+    <form method="post" action="/home/activare" name="form">
+        <label class="switch">
+            <input type="checkbox" name="ButonActivare" value="activat" id="buton-activare">
+            <span class="slider round"></span>
 
-<div class="text-center">
-    <form asp-controller="Home" asp-action="Send" method="post">
-        <div asp-validation-summary="All"></div>
-
-        <label asp-for="Buttons"></label>
-        <input type="text" asp-for="Buttons" />
-        <label asp-for="DesiredInflow"></label>
-        <input type="text" asp-for="DesiredInflow" />
-
-        <input type="submit" />
+        </label>
+        <span class="text">Pornire/Oprire</span>
     </form>
+    <div>
+        <button id="umplere">Umplere</button>
+    </div>
+    <div id="buton-golire">
+        <button id="golire">Golire</button>
+    </div>
+
+    <div class="valva" align="center">
+        Valva
+    </div>
+
 </div>
+
+<div class="linie1"></div>
+<div class="linie2"></div>
+<div class="linie3"></div>
+<div class="linie4"></div>
+<div class="linie5"></div>
+<div class="linie6"></div>
+<div class="linie7"></div>
+
+
+<span class="nivel1">Nivel 1</span>
+<span class="nivel2">Nivel 2</span>
+<span class="nivel3">Nivel 3</span>
+<span class="nivel4">Nivel 4</span>
+<span class="nivel5">Nivel 5</span>
+
+<div class="clearfix">
+
+</div>
+-->
+@section scripts {
+    <script type="text/javascript">
+    $(document).ready(function () {
+        getStare();
+        function getStare() {
+            $.ajax({                           // face apel de la client(browser) la server de tipul get
+                type: 'GET',
+                url: '/Home/Stare',
+                contentType: 'aplication/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+                    document.getElementById("level").value = response.waterLevel;
+                    document.getElementById("inflow-value").innerHTML = "Inflow: " + response.waterLevel;
+                    //$(".buton-stare").addClass("pornire");
+                    //$(".valva").addClass("deschidere");
+                    setTimeout(function () {
+                        getStare();
+                    }, 1000);
+                },
+                failure: function (response) {
+                    debugger;
+                }
+            });
+        }
+
+        function postStare(stare) {
+            $.ajax({
+                type: 'POST',
+                url: '/Home/UpdateStare',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify(stare),
+                success: function (response) {
+                    //    debugger;
+
+                },
+                failure: function (response) {
+                    debugger;
+                }
+            });
+
+        }
+
+        $("#umplere").click(function () {
+            if (activat == true) {
+                postStare({
+                    umplut: true,
+                    Deschis: false,
+                    Activat: true,
+                    Pornit: true
+                });
+
+            }
+
+        });
+
+        $("#golire").click(function () {
+            if (activat == true) {
+                postStare({
+                    umplut: false,
+                    Deschis: true,
+                    Activat: true,
+                    Pornit: true
+                });
+
+            }
+
+        });
+
+        $('#buton-activare').change(function () {
+            if ($(this).is(":checked")) {
+                postStare({
+                    umplut: umplut,
+                    Deschis: deschis,
+                    Activat: true,
+                    Pornit: pornit
+                });
+
+            }
+            else
+                postStare({
+                    umplut: umplut,
+                    Deschis: deschis,
+                    Activat: false,
+                    Pornit: pornit
+                });
+        });
+    });</script>
+}

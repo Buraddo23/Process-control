@@ -17,14 +17,13 @@ namespace PLCWebControl.Controllers
 
         //This is the default action
         public IActionResult Index()
-        {
-            var lastData = _service.GetLastData();
-            ViewData["Buttons"] = lastData.Buttons;
-            ViewData["Sensors"] = lastData.Sensors;
-            ViewData["WaterLevel"] = lastData.WaterLevel;
-            ViewData["Inflow"] = lastData.Inflow;
-            
+        {       
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult Stare() {         
+            return Json(_service.GetLastData());
         }
 
         public IActionResult Privacy()

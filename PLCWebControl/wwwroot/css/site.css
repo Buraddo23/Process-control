@@ -2,7 +2,9 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    background-image: url("/images/proces.png");
+    background-repeat: no-repeat;
+    background-position: 0px 50px;
 }
 
 /* Wrapping element */
@@ -12,26 +14,348 @@ body {
     padding-right: 15px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+footer {
+    position: absolute;
+    bottom: 0;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+progress {
+    width: 260px;
+    transform: rotate(-90deg);
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+#inflow-value {
+    margin-top: 10px;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
+#sensor1 {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top: 110px;
+    margin-left: -20px;
+}
+
+#sensor2 {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top: 65px;
+    margin-left: -20px;
+}
+#sensor3 {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top: 62px;
+    margin-left: -20px;
+}
+
+#sensor4 {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top:140px;
+    margin-left: -20px;
+}
+
+#sensor5 {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top: 0px;
+    margin-left: -20px;
+}
+
+.siloz {
+    border: 1px solid black;
+    width: 200px;
+    height: 400px;
+    display: inline-block;
+    margin-left: 80px;
+    /*background-size: 200% 200%;
+    background-image: linear-gradient(to top, #ff7070 50%, transparent 50%);
+    -webkit-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -moz-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -ms-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -o-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;*/
+}
+
+.umplere {
+    background-image: linear-gradient(to top, #ff7070 51%, transparent 50%);
+    background-position: 0 100%;
+    -webkit-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -moz-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -ms-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -o-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+}
+
+.container-stanga {
+    float: left;
+    position: absolute;
+    height: auto;
+}
+
+.container-mijloc {
+    margin-left: 62px;
+    margin-top: 195px;
+    position: absolute;
+    height: auto;
+}
+
+.container-dreapta {
+    margin-left: 435px;
+    margin-top: 100px;
+    position: absolute;
+    height: auto;
+}
+
+#buton-golire {
+    margin-top: 20px;
+}
+
+.pornire {
+    background-color: lightgreen;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 33px;
+}
+
+    .switch input {
         display: none;
     }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+
+
+.valva {
+    width: 80px;
+    height: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    margin-top: 315px;
+    font-size: 16px;
+    margin-left: -148px;
+}
+
+.deschidere {
+    background-color: lightgreen;
+}
+
+.linie1 {
+    background-color: black;
+    height: 1px;
+    width: 60px;
+    position: absolute;
+    top: 374px;
+    left: 75px;
+}
+
+.linie2 {
+    background-color: black;
+    height: 342px;
+    width: 1px;
+    position: absolute;
+    top: 32px;
+    left: 134px;
+}
+
+.linie3 {
+    background-color: black;
+    height: 1px;
+    width: 26px;
+    position: absolute;
+    top: 32px;
+    left: 134px;
+}
+
+.linie4 {
+    background-color: black;
+    height: 41px;
+    width: 1px;
+    position: absolute;
+    top: 400px;
+    left: 332px;
+}
+
+.linie5 {
+    background-color: black;
+    height: 1px;
+    width: 68px;
+    position: absolute;
+    top: 440px;
+    left: 332px;
+}
+
+.linie6 {
+    background-color: black;
+    height: 1px;
+    width: 66px;
+    position: absolute;
+    top: 442px;
+    left: 478px;
+}
+
+.linie7 {
+    background-color: black;
+    height: 37px;
+    width: 1px;
+    position: absolute;
+    top: 443px;
+    left: 542px;
+}
+
+.text {
+    position: absolute;
+    top: 7px;
+    left: 78px;
+}
+
+.buton-istoric {
+    position: absolute;
+    left: -30px;
+    top: -115px;
+}
+
+table th {
+    text-align: center
+}
+
+.buton-back {
+    position: absolute;
+    top: -100px;
+    left: 14px;
+}
+
+
+.nivel1 {
+    position: absolute;
+    top: 351px;
+    left: 377px;
+}
+
+.nivel2 {
+    position: absolute;
+    top: 267px;
+    left: 377px;
+}
+
+.nivel3 {
+    position: absolute;
+    top: 177px;
+    left: 377px;
+}
+
+.nivel4 {
+    position: absolute;
+    top: 94px;
+    left: 377px;
+}
+
+.nivel5 {
+    position: absolute;
+    top: 42px;
+    left: 377px
+}
+
+.nivel-1 {
+    width: 100%;
+    border: 1px solid red;
+    height: 33px;
+}
+
+.nivel-2 {
+    width: 100%;
+    border: 1px solid red;
+    height: 84px;
+}
+
+.nivel-3 {
+    width: 100%;
+    border: 1px solid red;
+    height: 90px;
+}
+
+.nivel-4 {
+    width: 100%;
+    border: 1px solid red;
+    height: 84px;
+}
+
+.nivel-5 {
+    width: 100%;
+    border: 1px solid red;
+    height: 57px;
+}
+
+.nivel-6 {
+    width: 100%;
+    border: 1px solid red;
+    height: 50px;
+}
+
+.nivel-1, .nivel-2, .nivel-3, .nivel-4, .nivel-5 {
+    background-size: 200% 200%;
+    background-image: linear-gradient(to top, #ff7070 50%, transparent 50%);
+    -webkit-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -moz-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -ms-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    -o-transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
+    transition: background-position 1000ms, color 1000ms ease, border-color 1000ms ease;
 }

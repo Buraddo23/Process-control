@@ -50,6 +50,7 @@ namespace PLCWebControl.Services
                         _lastData.Sensors = bytes[1];
                         _lastData.WaterLevel = bytes[2];
                         _lastData.Inflow = bytes[3];
+                        _lastData.Outputs = bytes[4];
                     }
 
                     // Shutdown and end connection
