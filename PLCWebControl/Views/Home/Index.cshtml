@@ -22,59 +22,25 @@
         <div id="sensor4"></div>
     </div>
     <div class="container-control">
-        @using (Html.BeginForm("SendButton", "Home"))
-        {
-            <input type="submit" value="Off" /><br />
-            <input type="submit" value="On" /><br /><br /><br />
-            <input type="submit" value="P1" /><br />
-            <input type="submit" value="P2" /><br />
-            <input type="submit" value="RST" />
-        }
+        <input type="button" 
+               value="Off" 
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="Off" })'" /><br />
+        <input type="button" 
+               value="On" 
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="On" })'" /><br /><br /><br />
+        <input type="button" 
+               value="P1" 
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="P1" })'" /><br />
+        <input type="button" 
+               value="P2" 
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="P2" })'" /><br />
+        <input type="button" 
+               value="Rst" 
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="Rst" })'" />
     </div>
 </body>
 </html>
-<!--
-<div class="container-dreapta">
-    <form method="post" action="/home/activare" name="form">
-        <label class="switch">
-            <input type="checkbox" name="ButonActivare" value="activat" id="buton-activare">
-            <span class="slider round"></span>
 
-        </label>
-        <span class="text">Pornire/Oprire</span>
-    </form>
-    <div>
-        <button id="umplere">Umplere</button>
-    </div>
-    <div id="buton-golire">
-        <button id="golire">Golire</button>
-    </div>
-
-    <div class="valva" align="center">
-        Valva
-    </div>
-
-</div>
-
-<div class="linie1"></div>
-<div class="linie2"></div>
-<div class="linie3"></div>
-<div class="linie4"></div>
-<div class="linie5"></div>
-<div class="linie6"></div>
-<div class="linie7"></div>
-
-
-<span class="nivel1">Nivel 1</span>
-<span class="nivel2">Nivel 2</span>
-<span class="nivel3">Nivel 3</span>
-<span class="nivel4">Nivel 4</span>
-<span class="nivel5">Nivel 5</span>
-
-<div class="clearfix">
-
-</div>
--->
 @section scripts {
     <script type="text/javascript">
     $(document).ready(function () {
@@ -87,38 +53,38 @@
                 dataType: 'json',
                 success: function (response) {
                     document.getElementById("level").value = response.waterLevel;
-                    document.getElementById("inflow-value").innerHTML = "Inflow: " + response.waterLevel;
-                    if (response.Sensor1State == true) {
+                    document.getElementById("inflow-value").innerHTML = "Inflow: " + response.inflow;
+                    if (response.sensor1State == true) {
                         document.getElementById("sensor1").style.backgroundColor = "green";
                     } else {
                         document.getElementById("sensor1").style.backgroundColor = "red";
                     }
-                    if (response.Sensor2State == true) {
+                    if (response.sensor2State == true) {
                         document.getElementById("sensor2").style.backgroundColor = "green";
                     } else {
                         document.getElementById("sensor2").style.backgroundColor = "red";
                     }
-                    if (response.Sensor3State == true) {
+                    if (response.sensor3State == true) {
                         document.getElementById("sensor3").style.backgroundColor = "green";
                     } else {
                         document.getElementById("sensor3").style.backgroundColor = "red";
                     }
-                    if (response.Sensor4State == true) {
+                    if (response.sensor4State == true) {
                         document.getElementById("sensor4").style.backgroundColor = "green";
                     } else {
                         document.getElementById("sensor4").style.backgroundColor = "red";
                     }
-                    if (response.Sensor5State == true) {
+                    if (response.sensor5State == true) {
                         document.getElementById("sensor5").style.backgroundColor = "green";
                     } else {
                         document.getElementById("sensor5").style.backgroundColor = "red";
                     }
-                    if (response.M1ONLED == true) {
+                    if (response.m1ONLED == true) {
                         document.getElementById("motor1").style.backgroundColor = "green";
                     } else {
                         document.getElementById("motor1").style.backgroundColor = "red";
                     }
-                    if (response.M2ONLED == true) {
+                    if (response.m2ONLED == true) {
                         document.getElementById("motor2").style.backgroundColor = "green";
                     } else {
                         document.getElementById("motor2").style.backgroundColor = "red";

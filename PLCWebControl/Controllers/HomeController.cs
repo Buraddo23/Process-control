@@ -22,7 +22,6 @@ namespace PLCWebControl.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult SendButton(string button)
         {
             if (!String.IsNullOrWhiteSpace(button))
@@ -32,7 +31,7 @@ namespace PLCWebControl.Controllers
                 {
                     case "Off":
                         command.Buttons = 128;
-                        command.DesiredInflow = 128;
+                        command.DesiredInflow = 0;
                         _service.SendData(command);
                         break;
                     case "On":
