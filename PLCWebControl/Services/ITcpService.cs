@@ -1,5 +1,4 @@
 ﻿using PLCWebControl.Models;
-using System.Threading.Tasks;
 
 namespace PLCWebControl.Services
 {

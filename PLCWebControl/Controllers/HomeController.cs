@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PLCWebControl.Models;
 using PLCWebControl.Services;
@@ -27,6 +26,7 @@ namespace PLCWebControl.Controllers
             if (!String.IsNullOrWhiteSpace(button))
             {
                 var command = new CommandDataModel();
+                var inflow = _service.GetLastData().Inflow;
                 switch (button)
                 {
                     case "Off":
@@ -41,17 +41,37 @@ namespace PLCWebControl.Controllers
                         break;
                     case "P1":
                         command.Buttons = 16;
-                        command.DesiredInflow = 128;
+                        command.DesiredInflow = inflow;
                         _service.SendData(command);
                         break;
                     case "P2":
                         command.Buttons = 8;
+                        command.DesiredInflow = inflow;
+                        _service.SendData(command);
+                        break;
+                    case "Rst":
+                        command.Buttons = 4;
                         command.DesiredInflow = 128;
                         _service.SendData(command);
                         break;
-                    case "RST":
-                        command.Buttons = 4;
-                        command.DesiredInflow = 128;
+                    case "R1":
+                        command.Buttons = 2;
+                        command.DesiredInflow = inflow;
+                        _service.SendData(command);
+                        break;
+                    case "R2":
+                        command.Buttons = 1;
+                        command.DesiredInflow = inflow;
+                        _service.SendData(command);
+                        break;
+                    case "I+":
+                        command.Buttons = 0;
+                        command.DesiredInflow = (byte)(inflow + 8);
+                        _service.SendData(command);
+                        break;
+                    case "I-":
+                        command.Buttons = 0;
+                        command.DesiredInflow = (byte)(inflow - 8);
                         _service.SendData(command);
                         break;
                     default:
@@ -59,7 +79,7 @@ namespace PLCWebControl.Controllers
                         break;
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

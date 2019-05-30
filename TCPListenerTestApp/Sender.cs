@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -27,7 +26,7 @@ namespace TCP_PLC
 
 					nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 
-					//Thread.Sleep(2000);
+					Thread.Sleep(100);
 				}
 			}
 			catch (Exception ex)

@@ -52,6 +52,7 @@ namespace TCP_PLC
                 {
                     if ((plcIn[0] & (int)DigitalInputs0.M1Relay) != 0)
                     {
+                        //Console.WriteLine("Relay1 gen");
                         plcOut[0] ^= (int)DigitalOutputs.M1LED;
                     }
                     if ((plcIn[0] & (int)DigitalInputs0.M2Relay) != 0)
@@ -74,11 +75,13 @@ namespace TCP_PLC
                 {
                     if ((plcIn[0] & (int)DigitalInputs0.PumpOneTest) != 0)
                     {
+                        //Console.WriteLine("Pump1");
                         plcOut[0] |= (int)DigitalOutputs.PumpOne
                                   | (int)DigitalOutputs.M1LED;
                         Thread.Sleep(3000);
                         plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
                         plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M1LED);
+                        plcIn[0] = (byte)(plcIn[0] & ~(int)DigitalInputs0.PumpOneTest);
                     }
                 }
             }
@@ -100,6 +103,7 @@ namespace TCP_PLC
                         Thread.Sleep(3000);
                         plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
                         plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M2LED);
+                        plcIn[0] = (byte)(plcIn[0] & ~(int)DigitalInputs0.PumpTwoTest);
                     }
                 }
             }
@@ -160,30 +164,37 @@ namespace TCP_PLC
                     power = true;
                     plcOut[0] |= (int)DigitalOutputs.OnLED;
                     plcOut[1] = plcIn[3];
+                    //Console.WriteLine("Turned On");
                 }
                 if ((plcIn[0] & (int)DigitalInputs0.Off) != 0)
                 {
                     power = false;
                     plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.OnLED);
                     plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
+                    plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M1LED);
                     plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
+                    plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M2LED);
                     plcOut[1] = 0;
+                    process.SetCommand(0, 0);
+                    //Console.WriteLine("Turned Off");
                 }
 
                 if (power)
                 {
                     //Reset and Alarm behaviour
-                    if ((plcIn[0] & (int)DigitalInputs0.Reset) != 0)
+                    if (brokenPump && (plcIn[0] & (int)DigitalInputs0.Reset) != 0)
                     {
                         plcOut[0] = (int)DigitalOutputs.OnLED;
                         plcOut[1] = plcIn[3];
                         brokenPump = false;
+                        //Console.WriteLine("Controller has been reset");
                     }
                     if (brokenPump)
                     {
-                        plcOut[0] = (int)DigitalOutputs.Alarm
-                                  | (int)DigitalOutputs.OnLED;
+                        plcOut[0] |= (int)DigitalOutputs.Alarm
+                                   | (int)DigitalOutputs.OnLED;
                         plcOut[1] = 0;
+                        //Console.WriteLine("Alarm");
                     }
                     else
                     {
@@ -193,12 +204,14 @@ namespace TCP_PLC
                             plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpOne);
                             plcOut[0] |= (int)DigitalOutputs.Alarm;
                             brokenPump = true;
+                            //Console.WriteLine("Pump1 broken, starting emergency procedure");
                         }
                         if ((plcIn[0] & (int)DigitalInputs0.M2Relay) != 0)
                         {
                             plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
                             plcOut[0] |= (int)DigitalOutputs.Alarm;
                             brokenPump = true;
+                            //Console.WriteLine("Pump2 broken, starting emergency procedure");
                         }
 
                         //Pump RS flip-flop based on level reported by sensors
@@ -216,16 +229,19 @@ namespace TCP_PLC
                             plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.PumpTwo);
                             plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M1LED);
                             plcOut[0] = (byte)(plcOut[0] & ~(int)DigitalOutputs.M2LED);
+                            //Console.WriteLine("Pumps turned off");
                         }
                         if ((plcIn[1] & (int)DigitalInputs1.Sensor_2) != 0)
                         {
                             plcOut[0] |= (int)DigitalOutputs.PumpOne
                                       | (int)DigitalOutputs.M1LED;
+                            //Console.WriteLine("Pump1 On");
                         }
                         if ((plcIn[1] & (int)DigitalInputs1.Sensor_5) != 0)
                         {
                             plcOut[0] |= (int)DigitalOutputs.PumpTwo
                                       | (int)DigitalOutputs.M2LED;
+                            //Console.WriteLine("Pump2 On");
                         }
                     }
                     
@@ -247,7 +263,7 @@ namespace TCP_PLC
                 //Update the inputs of the PLC
                 plcIn[1] = process.GetState()[0];
                 plcIn[2] = process.GetState()[1];
-                //Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\nO0: {3}\tO1: {4}\n", plcIn[0], plcIn[1], plcIn[2], plcOut[0], plcOut[1]);
+                //Console.WriteLine("I0: {0}\tI1: {1}\tI2: {2}\tI3: {3}\nO0: {4}\tO1: {5}\n", plcIn[0], plcIn[1], plcIn[2], plcIn[3], plcOut[0], plcOut[1]);
             }
 		}
         

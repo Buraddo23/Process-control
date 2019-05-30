@@ -25,11 +25,8 @@ namespace TCP_PLC
                 // Enter the listening loop.
                 while (true)
 				{                
-                    Console.WriteLine("Waiting for a connection... ");
-
                     // Perform a blocking call to accept requests.
                     TcpClient client = server.AcceptTcpClient();               
-                    Console.WriteLine("Connected!");
 
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
@@ -39,6 +36,7 @@ namespace TCP_PLC
                     // Loop to receive all the data sent by the client.
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
 					{
+                        Console.WriteLine("Received command: {0} {1}", bytes[0], bytes[1]);
                         Program.SetButtonState(bytes[0]);
                         Program.ModifyInflow(bytes[1]);
                     }
@@ -56,9 +54,6 @@ namespace TCP_PLC
                 // Stop listening for new clients.
                 server.Stop();
 			}
-
-            Console.WriteLine("Hit enter to continue...");
-            Console.Read();
 		}
 	}	
 }

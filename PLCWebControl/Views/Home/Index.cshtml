@@ -16,27 +16,41 @@
         <progress id="level" value=50 max=256></progress>
         <div id="motor1"></div>
         <div id="motor2"></div>
+        <div id="alarm"></div>
     </div>
     <div class="container-dreapta">
         <div id="sensor5"></div>
         <div id="sensor4"></div>
+        <div id="on"></div>
     </div>
     <div class="container-control">
-        <input type="button" 
-               value="Off" 
+        <input type="button"
+               value="Off"
                onclick="location.href='@Url.Action("SendButton", "Home" , new { button="Off" })'" /><br />
-        <input type="button" 
-               value="On" 
+        <input type="button"
+               value="On"
                onclick="location.href='@Url.Action("SendButton", "Home" , new { button="On" })'" /><br /><br /><br />
-        <input type="button" 
-               value="P1" 
+        <input type="button"
+               value="P1"
                onclick="location.href='@Url.Action("SendButton", "Home" , new { button="P1" })'" /><br />
-        <input type="button" 
-               value="P2" 
+        <input type="button"
+               value="P2"
                onclick="location.href='@Url.Action("SendButton", "Home" , new { button="P2" })'" /><br />
-        <input type="button" 
-               value="Rst" 
-               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="Rst" })'" />
+        <input type="button"
+               value="Rst"
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="Rst" })'" /><br /><br />
+        <input type="button"
+               value="R1"
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="R1" })'" />
+        <input type="button"
+               value="R2"
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="R2" })'" /><br /><br /><br /><br /><br />
+        <input type="button"
+               value="I-"
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="I-" })'" />
+        <input type="button"
+               value="I+"
+               onclick="location.href='@Url.Action("SendButton", "Home" , new { button="I+" })'" />
     </div>
 </body>
 </html>
@@ -88,6 +102,16 @@
                         document.getElementById("motor2").style.backgroundColor = "green";
                     } else {
                         document.getElementById("motor2").style.backgroundColor = "red";
+                    }
+                    if (response.onled == true) {
+                        document.getElementById("on").style.backgroundColor = "green";
+                    } else {
+                        document.getElementById("on").style.backgroundColor = "red";
+                    }
+                    if (response.alarm == true) {
+                        document.getElementById("alarm").style.backgroundColor = "yellow";
+                    } else {
+                        document.getElementById("alarm").style.backgroundColor = "white";
                     }
                     setTimeout(function () {
                         getStare();

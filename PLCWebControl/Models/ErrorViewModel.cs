@@ -1,5 +1,3 @@
-using System;
-
 namespace PLCWebControl.Models
 {
     public class ErrorViewModel
